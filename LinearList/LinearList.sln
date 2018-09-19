@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LinearList", "LinearList\LinearList.vcxproj", "{1FCAA926-F4D6-43DA-8D3D-DBCC8D6E9169}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "最大子列和问题", "最大子列和问题\最大子列和问题.vcxproj", "{ECB51883-2B8B-48B3-9E3A-7DE78664B8AE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "一元多项式的乘法与加法运算", "一元多项式的乘法与加法运算\一元多项式的乘法与加法运算.vcxproj", "{B9E6C82F-178C-4A4B-A401-3F7971FA4109}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +25,22 @@ Global
 		{1FCAA926-F4D6-43DA-8D3D-DBCC8D6E9169}.Release|x64.Build.0 = Release|x64
 		{1FCAA926-F4D6-43DA-8D3D-DBCC8D6E9169}.Release|x86.ActiveCfg = Release|Win32
 		{1FCAA926-F4D6-43DA-8D3D-DBCC8D6E9169}.Release|x86.Build.0 = Release|Win32
+		{ECB51883-2B8B-48B3-9E3A-7DE78664B8AE}.Debug|x64.ActiveCfg = Debug|x64
+		{ECB51883-2B8B-48B3-9E3A-7DE78664B8AE}.Debug|x64.Build.0 = Debug|x64
+		{ECB51883-2B8B-48B3-9E3A-7DE78664B8AE}.Debug|x86.ActiveCfg = Debug|Win32
+		{ECB51883-2B8B-48B3-9E3A-7DE78664B8AE}.Debug|x86.Build.0 = Debug|Win32
+		{ECB51883-2B8B-48B3-9E3A-7DE78664B8AE}.Release|x64.ActiveCfg = Release|x64
+		{ECB51883-2B8B-48B3-9E3A-7DE78664B8AE}.Release|x64.Build.0 = Release|x64
+		{ECB51883-2B8B-48B3-9E3A-7DE78664B8AE}.Release|x86.ActiveCfg = Release|Win32
+		{ECB51883-2B8B-48B3-9E3A-7DE78664B8AE}.Release|x86.Build.0 = Release|Win32
+		{B9E6C82F-178C-4A4B-A401-3F7971FA4109}.Debug|x64.ActiveCfg = Debug|x64
+		{B9E6C82F-178C-4A4B-A401-3F7971FA4109}.Debug|x64.Build.0 = Debug|x64
+		{B9E6C82F-178C-4A4B-A401-3F7971FA4109}.Debug|x86.ActiveCfg = Debug|Win32
+		{B9E6C82F-178C-4A4B-A401-3F7971FA4109}.Debug|x86.Build.0 = Debug|Win32
+		{B9E6C82F-178C-4A4B-A401-3F7971FA4109}.Release|x64.ActiveCfg = Release|x64
+		{B9E6C82F-178C-4A4B-A401-3F7971FA4109}.Release|x64.Build.0 = Release|x64
+		{B9E6C82F-178C-4A4B-A401-3F7971FA4109}.Release|x86.ActiveCfg = Release|Win32
+		{B9E6C82F-178C-4A4B-A401-3F7971FA4109}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
