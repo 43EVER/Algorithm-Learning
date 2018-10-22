@@ -21,6 +21,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Saving James Bond - Hard Ve
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "旅游规划", "旅游规划\旅游规划.vcxproj", "{C9B67EC7-C069-4443-BBEC-46AC70F5B369}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Emergency", "Emergency\Emergency.vcxproj", "{732A62F8-CF7B-470E-9B6C-1E02E040D3EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -101,6 +103,14 @@ Global
 		{C9B67EC7-C069-4443-BBEC-46AC70F5B369}.Release|x64.Build.0 = Release|x64
 		{C9B67EC7-C069-4443-BBEC-46AC70F5B369}.Release|x86.ActiveCfg = Release|Win32
 		{C9B67EC7-C069-4443-BBEC-46AC70F5B369}.Release|x86.Build.0 = Release|Win32
+		{732A62F8-CF7B-470E-9B6C-1E02E040D3EE}.Debug|x64.ActiveCfg = Debug|x64
+		{732A62F8-CF7B-470E-9B6C-1E02E040D3EE}.Debug|x64.Build.0 = Debug|x64
+		{732A62F8-CF7B-470E-9B6C-1E02E040D3EE}.Debug|x86.ActiveCfg = Debug|Win32
+		{732A62F8-CF7B-470E-9B6C-1E02E040D3EE}.Debug|x86.Build.0 = Debug|Win32
+		{732A62F8-CF7B-470E-9B6C-1E02E040D3EE}.Release|x64.ActiveCfg = Release|x64
+		{732A62F8-CF7B-470E-9B6C-1E02E040D3EE}.Release|x64.Build.0 = Release|x64
+		{732A62F8-CF7B-470E-9B6C-1E02E040D3EE}.Release|x86.ActiveCfg = Release|Win32
+		{732A62F8-CF7B-470E-9B6C-1E02E040D3EE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
