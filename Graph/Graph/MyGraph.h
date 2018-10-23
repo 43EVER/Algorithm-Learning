@@ -34,7 +34,7 @@ public:
 		}
 	}
 
-	void addEdge(int u, int v, int w) {
+	void AddEdge(int u, int v, int w) {
 		map[u][v] = w;
 		if (hasDirection == false)
 			map[v][u] = w;
