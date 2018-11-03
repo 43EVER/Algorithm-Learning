@@ -29,6 +29,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "How Long Does It Take", "Ho
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "关键活动", "关键活动\关键活动.vcxproj", "{E3470EC3-9981-488A-933A-CD1D66ACFA6E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "All Roads Lead to Rome", "All Roads Lead to Rome\All Roads Lead to Rome.vcxproj", "{87F080AF-A381-45AB-9AC7-30C30C10D9A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -141,6 +143,14 @@ Global
 		{E3470EC3-9981-488A-933A-CD1D66ACFA6E}.Release|x64.Build.0 = Release|x64
 		{E3470EC3-9981-488A-933A-CD1D66ACFA6E}.Release|x86.ActiveCfg = Release|Win32
 		{E3470EC3-9981-488A-933A-CD1D66ACFA6E}.Release|x86.Build.0 = Release|Win32
+		{87F080AF-A381-45AB-9AC7-30C30C10D9A5}.Debug|x64.ActiveCfg = Debug|x64
+		{87F080AF-A381-45AB-9AC7-30C30C10D9A5}.Debug|x64.Build.0 = Debug|x64
+		{87F080AF-A381-45AB-9AC7-30C30C10D9A5}.Debug|x86.ActiveCfg = Debug|Win32
+		{87F080AF-A381-45AB-9AC7-30C30C10D9A5}.Debug|x86.Build.0 = Debug|Win32
+		{87F080AF-A381-45AB-9AC7-30C30C10D9A5}.Release|x64.ActiveCfg = Release|x64
+		{87F080AF-A381-45AB-9AC7-30C30C10D9A5}.Release|x64.Build.0 = Release|x64
+		{87F080AF-A381-45AB-9AC7-30C30C10D9A5}.Release|x86.ActiveCfg = Release|Win32
+		{87F080AF-A381-45AB-9AC7-30C30C10D9A5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
