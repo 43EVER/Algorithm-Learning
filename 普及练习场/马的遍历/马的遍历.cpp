@@ -10,10 +10,6 @@ using namespace std;
 
 struct Node {
 	int i, j, cnt;
-
-	friend bool operator< (const Node& a, const Node& b) {
-		return b.cnt < a.cnt;
-	}
 };
 
 int mp[400 + 5][400 + 5];
@@ -24,14 +20,12 @@ int mm[8][2] = {
 };
 
 void bfs(int si, int sj) {
-	priority_queue<Node> q;
+	queue<Node> q;
 	Node next;
-	int ans = 0;
 	q.push({ si, sj, 0 });
+	mp[si][sj] = 0;
 	while (!q.empty()) {
-		Node cur = q.top(); q.pop();
-		mp[cur.i][cur.j] = cur.cnt;
-		ans = max(ans, cur.cnt);
+		Node cur = q.front(); q.pop();
 		for (int i = 0; i < 8; i++) {
 			next.i = cur.i + mm[i][0];
 			next.j = cur.j + mm[i][1];
@@ -39,6 +33,7 @@ void bfs(int si, int sj) {
 			if (next.i < 0 || next.i >= n || next.j < 0 || next.j >= m || mp[next.i][next.j] != -1)
 				continue;
 			q.push(next);
+			mp[next.i][next.j] = next.cnt;
 		}
 	}
 }

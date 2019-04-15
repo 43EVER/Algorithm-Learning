@@ -1,69 +1,66 @@
-﻿#include<queue>
-#include<cstdio>
-#include<cstring>
-#include<iostream>
-#include<algorithm>
-#define N 100
+﻿#include <iostream>
+#include <queue>
 using namespace std;
-char ch;
-bool flag, vis[N][N], vist[N][N][5];
-int n, m, d, sx, sy, ex, ey, dis[N][N];
-int xx[4][3] = { {0,0,0},{-1,-2,-3},{0,0,0},{1,2,3} };
-int yy[4][3] = { {-1,-2,-3},{0,0,0},{1,2,3},{0,0,0} };
-int read()
-{
-	int x = 0, f = 1; char ch = getchar();
-	while (ch<'0' || ch>'9') ch = getchar();
-	while (ch >= '0' && ch <= '9') x = x * 10 + ch - '0', ch = getchar();
-	return x * f;
-}
-struct Que
-{
-	int x, y, d, step;
-}que;
-queue<Que>q;
-int main()
-{
-	n = read(), m = read();
-	for (int i = 1; i <= n; i++)
-		for (int j = 1; j <= m; j++)
-		{
-			vis[i][j] = read();
-			if (vis[i][j])
-				vis[i - 1][j] = vis[i - 1][j - 1] = vis[i][j - 1] = true;
-		}
-	sx = read(), sy = read();
-	ex = read(), ey = read();
-	cin >> ch; vis[sx][sy] = 1;
-	if (ch == 'W') que.d = 0;
-	if (ch == 'E') que.d = 2;
-	if (ch == 'N') que.d = 1;
-	if (ch == 'S') que.d = 3;
-	que.x = sx, que.y = sy;
-	dis[sx][sy] = que.step = 0;
-	vist[sx][sy][que.d] = true;
-	q.push(que);
-	while (!q.empty())
-	{
-		Que p = q.front(); q.pop();
-		if (p.x == ex && p.y == ey) { printf("%d", p.step); return 0; }
-		for (int i = 0; i < 3; i++)
-		{
-			int x = p.x + xx[p.d][i], y = p.y + yy[p.d][i];
-			if (x < 1 || y < 1 || x >= n || y >= m || vis[x][y]) break;
-			if (vist[x][y][p.d]) continue;
-			vist[x][y][p.d] = true;
-			que.x = x, que.y = y, que.d = p.d, que.step = p.step + 1;
-			q.push(que);
-		}
-		que.x = p.x, que.y = p.y, que.d = p.d + 1, que.step = p.step + 1;
-		if (p.d + 1 == 4) que.d = 0;
-		if (!vist[que.x][que.y][que.d]) vist[que.x][que.y][que.d] = true, q.push(que);
-		que.x = p.x, que.y = p.y, que.d = p.d - 1, que.step = p.step + 1;
-		if (p.d - 1 == -1) que.d = 3;
-		if (!vist[que.x][que.y][que.d])
-			vist[p.x][p.y][p.d] = true, q.push(que);
+
+struct Node {
+	int i, j, cnt, fx;
+	friend bool operator< (const Node& a, const Node& b) {
+		return b.cnt < a.cnt;
 	}
-	printf("-1");
-	return 0;
+};
+
+const int N = 55;
+const int dx[] = { 0, 1, 0, -1 }, dy[] = { 1, 0, -1, 0 };
+int n, m, mp[N][N], si, ei, sj, ej;
+bool vis[N][N][4];
+char fx;
+
+int bfs() {
+	if (mp[si][sj])
+		return -1;
+	int _fx = 0;
+	switch (fx) {
+		case 'E': _fx = 0; break;
+		case 'S': _fx = 1; break;
+		case 'W': _fx = 2; break;
+		case 'N': _fx = 3; break;
+	}
+	Node fir = { si, sj, 0, _fx };
+	vis[si][sj][_fx] = 1;
+	priority_queue<Node> q;
+	q.push(fir);
+	while (!q.empty()) {
+		Node now = q.top(), next; q.pop();
+		if (now.i == ei && now.j == ej)
+			return now.cnt;
+		for (int i = 1; i <= 3; i++) {
+			next = { now.i + i * dx[now.fx], now.j + i * dy[now.fx], now.cnt + 1, now.fx };
+			if (next.i <= 0 || next.i >= n || next.j <= 0 || next.j >= m || mp[next.i][next.j]) break;
+			else if (!vis[next.i][next.j][next.fx])
+				q.push(next), vis[next.i][next.j][next.fx] = 1;
+		}
+		next = { now.i, now.j, now.cnt + 1, (now.fx + 1) % 4 };
+		if (!vis[next.i][next.j][next.fx])
+			q.push(next), vis[next.i][next.j][next.fx] = 1;
+		next = { now.i, now.j, now.cnt + 1, (now.fx + 3) % 4 };
+		if (!vis[next.i][next.j][next.fx])
+			q.push(next);
+	}
+	return -1;
+}
+
+int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+
+	cin >> n >> m;
+	for (int i = 1; i <= n; i++)
+		for (int j = 1; j <= m; j++) {
+			cin >> mp[i][j];
+			if (mp[i][j] == 1)
+				mp[i - 1][j] = mp[i][j - 1] = mp[i - 1][j - 1] = 1;
+		}
+	
+	cin >> si >> sj >> ei >> ej >> fx;
+	cout << bfs();
 }
