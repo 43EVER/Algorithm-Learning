@@ -1,43 +1,36 @@
-﻿// 逆序对.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+﻿// 64位整数乘法.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
 #include <iostream>
 #include <algorithm>
 using namespace std;
 
-int n;
-int a[5000000 + 10], tmp[5000000 + 10];
-long long ans;
-
-void merge_sort(int l, int r) {
-	if (l >= r)
-		return;
-	int m = l + ((r - l) >> 1);
-	merge_sort(l, m), merge_sort(m + 1, r);
-	int i = l, j = m + 1, cnt = 0;
-	while (i <= m && j <= r) {
-		if (a[i] <= a[j])
-			tmp[cnt++] = a[i++];
-		else
-			tmp[cnt++] = a[j++], ans += m + 1 - i;
-	}
-	while (i <= m)
-		tmp[cnt++] = a[i++];
-	while (j <= r)
-		tmp[cnt++] = a[j++];
-	for (int i = 0; i < cnt; i++)
-		a[i + l] = tmp[i];
+long long cal(long long a, long long b, long long p) {
+	a %= p, b %= p;
+	long long c = (long double)a * b / p;
+	long long ans = a * b - c * p;
+	if (ans < 0)
+		ans += p;
+	else if (ans >= p)
+		ans -= p;
+	return ans;
 }
 
 int main() {
-	ios::sync_with_stdio(false);
 	cin.tie(0);
+	ios::sync_with_stdio(false);
 
-	cin >> n;
-	for (int i = 0; i < n; i++)
-		cin >> a[i];
+	long long a, b, p;
+	cin >> a >> b >> p;
 	
-	merge_sort(0, n - 1);
+	cout << cal(a, b, p) << endl;
+	return 0;
+	long long ans = 0;
+	for (; b; b >>= 1) {
+		if (b & 1)
+			ans = (ans + a) % p;
+		a = (a << 1) % p;
+	}
 	cout << ans << endl;
 }
 

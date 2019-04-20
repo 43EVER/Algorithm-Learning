@@ -1,44 +1,38 @@
-﻿// 逆序对.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+﻿// 递归实现的排列枚举.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
 #include <iostream>
 #include <algorithm>
+#include <vector>
 using namespace std;
 
 int n;
-int a[5000000 + 10], tmp[5000000 + 10];
-long long ans;
+vector<int> chosen(13);
+vector<int> order(13);
 
-void merge_sort(int l, int r) {
-	if (l >= r)
+void calc(int k) {
+	if (k == n + 1) {
+		for (int i = 1; i <= n; i++)
+			cout << order[i] << " ";
+		cout << endl;
 		return;
-	int m = l + ((r - l) >> 1);
-	merge_sort(l, m), merge_sort(m + 1, r);
-	int i = l, j = m + 1, cnt = 0;
-	while (i <= m && j <= r) {
-		if (a[i] <= a[j])
-			tmp[cnt++] = a[i++];
-		else
-			tmp[cnt++] = a[j++], ans += m + 1 - i;
 	}
-	while (i <= m)
-		tmp[cnt++] = a[i++];
-	while (j <= r)
-		tmp[cnt++] = a[j++];
-	for (int i = 0; i < cnt; i++)
-		a[i + l] = tmp[i];
+	for (int i = 1; i <= n; i++) {
+		if (chosen[i])
+			continue;
+		order[k] = i;
+		chosen[i] = true;
+		calc(k + 1);
+		chosen[i] = false;
+	}
 }
 
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(0);
 
-	cin >> n;
-	for (int i = 0; i < n; i++)
-		cin >> a[i];
-	
-	merge_sort(0, n - 1);
-	cout << ans << endl;
+	while (cin >> n)
+		calc(1);
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单

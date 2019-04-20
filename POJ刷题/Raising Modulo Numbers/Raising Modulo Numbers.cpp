@@ -1,44 +1,37 @@
-﻿// 逆序对.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+﻿// Raising Modulo Numbers.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
 #include <iostream>
 #include <algorithm>
 using namespace std;
 
-int n;
-int a[5000000 + 10], tmp[5000000 + 10];
-long long ans;
+long long m;
 
-void merge_sort(int l, int r) {
-	if (l >= r)
-		return;
-	int m = l + ((r - l) >> 1);
-	merge_sort(l, m), merge_sort(m + 1, r);
-	int i = l, j = m + 1, cnt = 0;
-	while (i <= m && j <= r) {
-		if (a[i] <= a[j])
-			tmp[cnt++] = a[i++];
-		else
-			tmp[cnt++] = a[j++], ans += m + 1 - i;
+long long cal(long long a, long long b) {
+	long long ans = 1 % m;
+	for (; b; b >>= 1) {
+		if (b & 1)
+			ans = ans * a % m;
+		a = a * a % m;
 	}
-	while (i <= m)
-		tmp[cnt++] = a[i++];
-	while (j <= r)
-		tmp[cnt++] = a[j++];
-	for (int i = 0; i < cnt; i++)
-		a[i + l] = tmp[i];
+	return ans;
 }
 
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(0);
 
-	cin >> n;
-	for (int i = 0; i < n; i++)
-		cin >> a[i];
-	
-	merge_sort(0, n - 1);
-	cout << ans << endl;
+	int z, h;
+	cin >> z;
+	while (z--) {
+		cin >> m >> h;
+		long long ans = 0, a, b;
+		for (int i = 0; i < h; i++) {
+			cin >> a >> b;
+			ans = (ans +  cal(a, b)) % m;
+		}
+		cout << ans << endl;
+	}
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
