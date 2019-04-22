@@ -1,30 +1,40 @@
-﻿// IncDec Sequence.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+﻿// 整数集合上的二分.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
 #include <iostream>
 #include <algorithm>
 using namespace std;
 
-const int MAX = 1e6 + 5;
-long long a[MAX];
+int a[100];
+
+int find(int l, int r, int x) {
+	while (l <= r) {
+		int mid = (l + r) >> 1;
+		if (x >= a[mid])
+			l = mid + 1;
+		else
+			r = mid - 1;
+	}
+	return l;
+}
+
+int find(double l, double r, double x) {
+	double mid;
+	while (l + 1e-5 <= r) {
+		mid = (l + r) / 2;
+		if (x - mid >= 1e5) l = mid + 1e5;
+		else r = mid - 1e5;
+	}
+	return l;
+}
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(0);
-
-	int n;
-	long long p = 0, q = 0, tmp;
+	int n, key;
 	cin >> n;
-	for (int i = 1; i <= n; i++) {
+	for (int i = 0; i < n; i++)
 		cin >> a[i];
-		if (i != 1) {
-			tmp = a[i] - a[i - 1];
-			if (tmp > 0) p += tmp;
-			else if (tmp < 0) q -= tmp;
-		}
-	}
-	cout << max(p, q) << endl;
-	cout << abs(p - q) + 1 << endl;
+	cin >> key;
+	cout << find(0, n - 1, key) << endl;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单

@@ -1,30 +1,39 @@
-﻿// IncDec Sequence.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+﻿// Strange fuction.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
 #include <iostream>
 #include <algorithm>
+#include <iomanip>
 using namespace std;
 
-const int MAX = 1e6 + 5;
-long long a[MAX];
+const double EPS = 1e-7;
+
+double y;
+
+double f(double x) {
+	return 6.0 * x * x * x * x * x * x * x + 8 * x * x * x * x * x * x + 7 * x * x * x + 5 * x * x - y * x;
+}
+
+double solve() {
+	double l = 0.0, r = 100.0;
+	while (l + EPS < r) {
+		double lmid = l + (r - l) / 3;
+		double rmid = r - (r - l) / 3;
+		if (f(lmid) > f(rmid))
+			l = lmid;
+		else
+			r = rmid;
+	}
+	return l;
+}
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(0);
-
-	int n;
-	long long p = 0, q = 0, tmp;
-	cin >> n;
-	for (int i = 1; i <= n; i++) {
-		cin >> a[i];
-		if (i != 1) {
-			tmp = a[i] - a[i - 1];
-			if (tmp > 0) p += tmp;
-			else if (tmp < 0) q -= tmp;
-		}
+	int t;
+	cin >> t;
+	while (t--) {
+		cin >> y;
+		cout << fixed << setprecision(4) << f(solve()) << endl;
 	}
-	cout << max(p, q) << endl;
-	cout << abs(p - q) + 1 << endl;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单

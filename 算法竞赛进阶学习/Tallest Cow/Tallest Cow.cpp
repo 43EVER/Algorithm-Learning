@@ -2,10 +2,34 @@
 //
 
 #include <iostream>
+#include <vector>
+#include <cstring>
+#include <map>
+using namespace std;
 
-int main()
-{
-    std::cout << "Hello World!\n"; 
+const int MAX = 1e4;
+
+int c[MAX + 10], d[MAX + 10];
+
+int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+
+	int n, i, h, r, a, b;
+	cin >> n >> i >> h >> r;
+	map< pair<int, int>, bool> existed;
+	for (int i = 0; i < r; i++) {
+		cin >> a >> b;
+		if (a > b) swap(a, b);
+		if (existed[make_pair(a, b)]) continue;
+		c[a + 1]--, c[b]++;
+		existed[make_pair(a, b)] = true;
+	}
+	for (int i = 1; i <= n; i++)
+		d[i] = d[i - 1] + c[i];
+
+	for (int i = 1; i <= n; i++)
+		cout << d[i] + h << endl;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
