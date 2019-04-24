@@ -1,48 +1,37 @@
-﻿// 整数集合上的二分.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+﻿// A. Neko Finds Grapes.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
 #include <iostream>
 #include <algorithm>
+#include <functional>
 using namespace std;
 
-int a[100];
+const int N = 100005;
 
-//a[l] <= key
-int find(int l, int r, int key) {
-	while (l < r) {
-		int mid = (l + r + 1) >> 1;
-		if (a[mid] <= key) l = mid;
-		else r = mid - 1;
-	}
-}
-
-//a[l] >= key
-
-int find(int l, int r, int key) {
-	while (l < r) {
-		int mid = (l + r) >> 1;
-		if (a[mid] >= key) r = mid;
-		else l = mid + 1;
-	}
-}
-
-int find(double l, double r, double x) {
-	double mid;
-	while (l + 1e-5 <= r) {
-		mid = (l + r) / 2;
-		if (x - mid >= 1e5) l = mid + 1e5;
-		else r = mid - 1e5;
-	}
-	return l;
-}
 
 int main() {
-	int n, key;
-	cin >> n;
-	for (int i = 0; i < n; i++)
-		cin >> a[i];
-	cin >> key;
-	cout << find(0, n - 1, key) << endl;
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+
+	int n, m;
+	cin >> n >> m;
+	int a1 = 0, a2 = 0, a3 = 0, b1 = 0, b2 = 0, b3 = 0, tmp;
+	for (int i = 0; i < n; i++) {
+		cin >> tmp;
+		if (tmp % 2 == 1) a1++;
+		else a2++;
+	}
+	for (int i = 0; i < m; i++) {
+		cin >> tmp;
+		if (tmp % 2 == 1) b1++;
+		else b2++;
+	}
+
+	int ans = 0;
+	ans += min(b1, a2);
+	ans += min(a1, b2);
+
+	cout << ans << endl;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单

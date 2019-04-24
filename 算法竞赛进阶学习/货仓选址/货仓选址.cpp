@@ -1,48 +1,32 @@
-﻿// 整数集合上的二分.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+﻿// 货仓选址.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
 #include <iostream>
 #include <algorithm>
+#include <functional>
 using namespace std;
 
-int a[100];
+const int N = 100005;
+long long a[N];
 
-//a[l] <= key
-int find(int l, int r, int key) {
-	while (l < r) {
-		int mid = (l + r + 1) >> 1;
-		if (a[mid] <= key) l = mid;
-		else r = mid - 1;
-	}
-}
-
-//a[l] >= key
-
-int find(int l, int r, int key) {
-	while (l < r) {
-		int mid = (l + r) >> 1;
-		if (a[mid] >= key) r = mid;
-		else l = mid + 1;
-	}
-}
-
-int find(double l, double r, double x) {
-	double mid;
-	while (l + 1e-5 <= r) {
-		mid = (l + r) / 2;
-		if (x - mid >= 1e5) l = mid + 1e5;
-		else r = mid - 1e5;
-	}
-	return l;
+long long f(long long n) {
+	return n < 0 ? -n : n;
 }
 
 int main() {
-	int n, key;
+	int n;
 	cin >> n;
 	for (int i = 0; i < n; i++)
 		cin >> a[i];
-	cin >> key;
-	cout << find(0, n - 1, key) << endl;
+	sort(a, a + n);
+
+	int pos = n >> 1;
+	long long ans = 0;
+	for (int i = 0; i < n; i++) {
+		if (i == pos) continue;
+		ans += f(a[pos] - a[i]);
+	}
+	cout << ans << endl;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
