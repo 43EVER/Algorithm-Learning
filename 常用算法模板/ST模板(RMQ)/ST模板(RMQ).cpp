@@ -1,42 +1,36 @@
-﻿// POJ2299 Ultra-QuickSort.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+﻿// ST模板(RMQ).cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
 #include <iostream>
 #include <algorithm>
 using namespace std;
 
-const int N = 500005;
-long long a[N], b[N];
-long long ans = 0;
+const int N = 1e6 + 5;
 
-inline void merge(int l, int m, int r) {
-	int i = l, j = m + 1;
-	for (int k = l; k <= r; k++)
-		if (j > r || i <= m && a[i] <= a[j]) b[k] = a[i++];
-		else ans += m + 1 - i, b[k] = a[j++];
-	for (int k = l; k <= r; k++) a[k] = b[k]; 
+int a[N], f[N][20];
+int n;
+
+void ST_prework() {
+	for (int i = 1; i <= n; i++) f[i][0] = a[i];
+	int t = log2(n) + 1;
+	for (int j = 1; j < t; j++)
+		for (int i = 1; i <= n - (1 << j) + 1; i++)
+			f[i][j] = max(f[i][j - 1], f[i + (1 << (j - 1))][j - 1]);
 }
 
-void merge_sort(int l, int r) {
-	if (l >= r) return;
-	int m = (l + r) >> 1;
-	merge_sort(l, m);
-	merge_sort(m + 1, r);
-	merge(l, m, r);
+int ST_query(int i, int j) {
+	int k = log2(j - i + 1);
+	return max(f[i][k], f[j - (1 << k) + 1][k]);
 }
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(0);
-
-	int n;
-	while (cin >> n && n) {
-		ans = 0;
-		for (int i = 0; i < n; i++) cin >> a[i];
-		merge_sort(0, n - 1);
-		cout << ans << endl;
-	}
-}
+	cin >> n;
+	for (int i = 1; i <= n; i++) cin >> a[i];
+	ST_prework();
+	int l, r;
+	while (cin >> l >> r)
+		cout << ST_query(l, r) << endl;
+}}
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单
