@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{68906757-64FD-4E08-9B05-3BA34734A602}</ProjectGuid>
+    <ProjectGuid>{64EA15D9-991E-4970-A217-0746C746CDCB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>IncreasingSubsequenceeasy</RootNamespace>
+    <RootNamespace>BTilingChallenge</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -151,7 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Increasing Subsequence (easy).cpp" />
+    <ClCompile Include="B. Tiling Challenge.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
