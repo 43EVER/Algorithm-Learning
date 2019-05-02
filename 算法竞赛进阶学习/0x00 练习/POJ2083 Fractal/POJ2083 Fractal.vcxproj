@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{CCD41D6C-08E0-4045-92BB-667E206B38B4}</ProjectGuid>
+    <ProjectGuid>{5165F48E-9E56-4860-8FAE-6393E7D1C67C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>偶数求和</RootNamespace>
+    <RootNamespace>POJ2083Fractal</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -151,7 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="偶数求和.cpp" />
+    <ClCompile Include="POJ2083 Fractal.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

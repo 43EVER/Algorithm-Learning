@@ -1,32 +1,33 @@
-﻿// 偶数求和.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+﻿// POJ3714 Raid.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
-#pragma GCC optimize(3)
 #include <iostream>
-#include <vector>
+#include <algorithm>
+#include <iomanip>
 using namespace std;
 
+const int N = 100000 + 5;
+
+double ax[N], ay[N];
+
+double cal(double x1, double y1, double x2, double y2) {
+	return sqrt(pow(double (x1 - x2), 2) + pow(double (y1 - y2), 2));
+}
+
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(0);
-
-	vector<int> a(100, 2);
-	int sz = a.size();
-	for (int i = 1; i < sz; i++)
-		a[i] = a[i - 1] + 2;
-
-	int m, n;
-	while (cin >> n >> m) {
-		for (int i = 0; i < n; ) {
-			int s = 0;
-			int j = 0;
-			for (; j < m && i < n; j++, i++)
-				s += a[i];
-			cout << s / j;
-			if (i < n)
-				cout << " ";
+	int t, n;
+	double x, y;
+	cin >> t;
+	while (t--) {
+		cin >> n;
+		for (int i = 0; i < n; i++) cin >> ax[i] >> ay[i];
+		double ans = 0x3f3f3f3f;
+		for (int i = 0; i < n; i++) {
+			cin >> x >> y;
+			for (int j = 0; j < n; j++)
+				ans = min(ans, cal(x, y, ax[j], ay[j]));
 		}
-		cout << endl;
+		cout << fixed << setprecision(3) << ans << endl;
 	}
 }
 

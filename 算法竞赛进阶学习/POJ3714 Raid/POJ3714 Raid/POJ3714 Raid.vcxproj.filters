@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="偶数求和.cpp">
+    <ClCompile Include="POJ3714 Raid.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
