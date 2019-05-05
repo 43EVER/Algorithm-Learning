@@ -1,34 +1,32 @@
-﻿// POJ3714 Raid.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
-//
+﻿// 前缀和，首尾相连的纸牌问题，排序 
 
 #include <iostream>
 #include <algorithm>
-#include <iomanip>
+#include <numeric>
+#include <map>
 using namespace std;
 
-const int N = 100000 + 5;
-
-double ax[N], ay[N];
-
-double cal(double x1, double y1, double x2, double y2) {
-	return sqrt(pow(double (x1 - x2), 2) + pow(double (y1 - y2), 2));
-}
+const int N = 1000005;
+int a[N];
 
 int main() {
-	int t, n;
-	double x, y;
-	cin >> t;
-	while (t--) {
-		cin >> n;
-		for (int i = 0; i < n; i++) cin >> ax[i] >> ay[i];
-		double ans = 0x3f3f3f3f;
-		for (int i = 0; i < n; i++) {
-			cin >> x >> y;
-			for (int j = 0; j < n; j++)
-				ans = min(ans, cal(x, y, ax[j], ay[j]));
-		}
-		cout << fixed << setprecision(3) << ans << endl;
-	}
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+	cout.tie(0);
+
+	int n;
+	long long sum = 0;
+	cin >> n;
+	for (int i = 1; i <= n; i++) cin >> a[i], sum += a[i];
+	sum /= n;
+	for (int i = 1; i <= n; i++) a[i] += a[i - 1] - sum;
+	sort(a + 1, a + 1 + n);
+	int mid = a[n >> 1];
+	long long ans = 0;
+	for (int i = 1; i <= n; i++)
+		ans += abs(a[i] - mid);
+
+	cout << ans << endl;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
