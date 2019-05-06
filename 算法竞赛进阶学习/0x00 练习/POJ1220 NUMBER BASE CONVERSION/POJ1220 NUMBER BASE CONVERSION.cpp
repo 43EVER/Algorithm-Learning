@@ -1,91 +1,87 @@
-﻿// POJ1220 NUMBER BASE CONVERSION.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
-//
-
-#include <iostream>
+﻿#include <iostream>
 #include <algorithm>
 #include <string>
-#include <numeric>
-#include <functional>
 #include <map>
 using namespace std;
 
-map<char, int> m1;
-map<int, char> m2;
+map<char, int> c2i;
+map<int, char> i2c;
 
-void multi(string& s, int x, int base) {
-	int tmp = 0;
-	for (int i = 0; i < s.length(); i++) {
-		tmp += m1[s[i]] * x;
-		s[i] = m2[tmp % base];
-		tmp /= base;
-	}
-	while (tmp) {
-		s.push_back(m2[tmp % base]);
-		tmp /= base;
-	}
+bool less_than(string a, string b) {
+	if (a.length() != b.length())
+		return a.length() < b.length();
+	reverse(a.begin(), a.end());
+	reverse(b.begin(), b.end());
+	return a < b;
 }
 
-void add(string& res, string& x, int base) {
-	string ans;
-	int pos = max(res.length(), x.length());
+string add(const string & a, const string & b, int base = 10) {
+	string res;
 	int i = 0, j = 0, tmp = 0;
-	while (i < res.length() && j < res.length()) {
-		tmp += m1[res[i++]] + m1[x[j++]];
-		ans.push_back(m2[tmp % base]);
+	while (i < a.length() && j < b.length()) {
+		tmp += c2i[a[i++]] + c2i[b[j++]];
+		res.push_back(i2c[tmp % base]);
 		tmp /= base;
 	}
-	while (i < res.length()) {
-		tmp += m1[res[i++]];
-		ans.push_back(m2[tmp % base]);
+	while (i < a.length()) {
+		tmp += c2i[a[i++]];
+		res.push_back(i2c[tmp % base]);
 		tmp /= base;
 	}
-	while (j < x.length()) {
-		tmp += m1[x[j++]];
-		ans.push_back(m2[tmp % base]);
+	while (j < b.length()) {
+		tmp += c2i[b[j++]];
+		res.push_back(i2c[tmp % base]);
 		tmp /= base;
 	}
 	while (tmp) {
-		ans.push_back(m2[tmp % base]);
+		res.push_back(i2c[tmp % base]);
 		tmp /= base;
 	}
-	res = ans;
+	return res;
+}
+
+string multiply(const string & a, int b, int base = 10) {
+	long long tmp = 0;
+	string res;
+	for (int i = 0; i < a.length(); i++) {
+		tmp += c2i[a[i]] * b;
+		res.push_back(i2c[tmp % base]);
+		tmp /= base;
+	}
+	while (tmp) {
+		res.push_back(i2c[tmp % base]);
+		tmp /= base;
+	}
+	return res;
+}
+
+string trans(string x, int base1, int base2) {
+	reverse(x.begin(), x.end());
+	string pow = "1", res = "0";
+	for (int i = 0; i < x.length(); i++) {
+		string tmp = multiply(pow, c2i[x[i]], base2);
+		res = add(res, tmp, base2);
+		pow = multiply(pow, base1, base2);
+		//cout << endl << pow << " " << c2i[x[i]] << " " << x[i] << " " << endl << endl;
+	}
+	return res;
 }
 
 int main() {
-	int t, base1, base2, cnt = 0;
-	for (int i = 0; i < 10; i++) m1['0' + i] = cnt, m2[cnt++] = '0' + i;
-	for (int i = 0; i < 26; i++) m1['A' + i] = cnt, m2[cnt++] = 'A' + i;
-	for (int i = 0; i < 26; i++) m1['a' + i] = cnt, m2[cnt++] = 'a' + i;
+	int cnt = 0, t;
+	for (int i = 0; i < 10; i++) c2i['0' + i] = cnt, i2c[cnt++] = '0' + i;
+	for (int i = 0; i < 26; i++) c2i['A' + i] = cnt, i2c[cnt++] = 'A' + i;
+	for (int i = 0; i < 26; i++) c2i['a' + i] = cnt, i2c[cnt++] = 'a' + i;
 
-	string temp1 = "1", temp2 = "11";
-	add(temp1, temp2, 2);
-	cout << temp1 << endl;
-
-	string str1, str2;
 	cin >> t;
 	while (t--) {
-		cin >> base1 >> base2 >> str1;
-		reverse(str1.begin(), str1.end());
-		string pow = "1";
-		str2 = "0";
-		for (int i = 0; i < str1.length(); i++) {
-			string tmp = pow;
-			multi(tmp, m1[str1[i]], base1);
-			add(str2, tmp, base2);
-			multi(pow, base1, base1);
-		}
-		reverse(str2.begin(), str2.end());
-		cout << str2 << endl;
+		string a, res;
+		int base1, base2;
+		cin >> base1 >> base2 >> a;
+		res = trans(a, base1, base2);
+		reverse(res.begin(), res.end());
+
+		cout << base1 << " " << a << endl;
+		cout << base2 << " " << res << endl << endl;
 	}
 }
-
-// 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
-// 调试程序: F5 或调试 >“开始调试”菜单
-
-// 入门提示: 
-//   1. 使用解决方案资源管理器窗口添加/管理文件
-//   2. 使用团队资源管理器窗口连接到源代码管理
-//   3. 使用输出窗口查看生成输出和其他消息
-//   4. 使用错误列表窗口查看错误
-//   5. 转到“项目”>“添加新项”以创建新的代码文件，或转到“项目”>“添加现有项”以将现有代码文件添加到项目
-//   6. 将来，若要再次打开此项目，请转到“文件”>“打开”>“项目”并选择 .sln 文件
