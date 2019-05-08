@@ -1,44 +1,54 @@
-﻿// POJ3714 Raid.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
-//
-
-#include <iostream>
+﻿#include <cstdio>
 #include <algorithm>
-#include <iomanip>
 #include <cmath>
+#include <iostream>
+#include <iomanip>
 using namespace std;
 
-const int N = 100000 + 5;
+const int N = 1e6 + 5;
+const double INF = 1e300;
 
-double ax[N], ay[N];
+struct P {
+	double x, y;
+	bool flag;
 
-double cal(double x1, double y1, double x2, double y2) {
-	return sqrt(pow(double(x1 - x2), 2) + pow(double(y1 - y2), 2));
+	bool operator< (const P& b) const {
+		return x < b.x;
+	}
+} p[N], q[N];
+
+double dis(P a, P b) {
+	if (a.flag == b.flag)
+		return INF;
+	return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+}
+
+double solve(int l, int r) {
+	if (l == r) return INF;
+	int m = (l + r) >> 1, tot = 0;
+	double mx = p[m].x, d = min(solve(l, m), solve(m + 1, r));
+
+	for (int i = l, j = m + 1; i <= m || j <= r; ++i) {
+		while (j <= r && (p[i].y > p[j].y || i > m)) q[tot++] = p[j++];
+		if (i <= m && abs(p[i].x - mx) < d) {
+			for (int k = j - 1; k > m && j - k < 3; --k) d = min(d, dis(p[i], p[k]));
+			for (int k = j; k <= r && k - j < 2; ++k) d = min(d, dis(p[i], p[k]));
+		}
+		if (i <= m) q[tot++] = p[i];
+	}
+	for (int i = 0; i < tot; i++) p[i + l] = q[i];
+
+	return d;
 }
 
 int main() {
 	int t, n;
-	double x, y;
-	cin >> t;
+	scanf("%d", &t);
 	while (t--) {
 		cin >> n;
-		for (int i = 0; i < n; i++) cin >> ax[i] >> ay[i];
-		double ans = 0x3f3f3f3f;
-		for (int i = 0; i < n; i++) {
-			cin >> x >> y;
-			for (int j = 0; j < n; j++)
-				ans = min(ans, cal(x, y, ax[j], ay[j]));
-		}
-		cout << fixed << setprecision(3) << ans << endl;
+		for (int i = 0; i < n; i++) scanf("%lf %lf", &p[i].x, &p[i].y), p[i].flag = false;
+		for (int i = n; i < 2 * n; i++) scanf("%lf %lf", &p[i].x, &p[i].y), p[i].flag = true;
+		sort(p, p + 2 * n);
+		cout << fixed << setprecision(3) << solve(0, 2 * n - 1) << endl;
 	}
 }
-
-// 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
-// 调试程序: F5 或调试 >“开始调试”菜单
-
-// 入门提示: 
-//   1. 使用解决方案资源管理器窗口添加/管理文件
-//   2. 使用团队资源管理器窗口连接到源代码管理
-//   3. 使用输出窗口查看生成输出和其他消息
-//   4. 使用错误列表窗口查看错误
-//   5. 转到“项目”>“添加新项”以创建新的代码文件，或转到“项目”>“添加现有项”以将现有代码文件添加到项目
-//   6. 将来，若要再次打开此项目，请转到“文件”>“打开”>“项目”并选择 .sln 文件
