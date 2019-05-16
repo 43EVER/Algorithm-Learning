@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ST模板(RMQ).cpp">
+    <ClCompile Include="HDOJ4699 Editor.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,36 +1,31 @@
-﻿// ST模板(RMQ).cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+﻿// stack 小功能.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 
+// stack 同时支持查询最小值
 #include <iostream>
+#include <stack>
 #include <algorithm>
-using namespace std;
-
-const int N = 1e6 + 5;
-
-int a[N], f[N][20];
-int n;
-
-void ST_prework() {
-	for (int i = 1; i <= n; i++) f[i][0] = a[i];
-	int t = log2(n) + 1;
-	for (int j = 1; j < t; j++)
-		for (int i = 1; i <= n - (1 << j) + 1; i++)
-			f[i][j] = max(f[i][j - 1], f[i + (1 << (j - 1))][j - 1]);
-}
-
-int ST_query(int i, int j) {
-	int k = log2(j - i + 1);
-	return max(f[i][k], f[j - (1 << k) + 1][k]);
-}
+#include <sstream>
+using namespace  std;
 
 int main() {
-	cin >> n;
-	for (int i = 1; i <= n; i++) cin >> a[i];
-	ST_prework();
-	int l, r;
-	while (cin >> l >> r)
-		cout << ST_query(l, r) << endl;
-}}
+	stack<pair<int, int>> s;
+	int n, x, min_value = 0x3f3f3f3f;
+	while (cin >> n) {
+		for (int i = 0; i < n; i++) {
+			cin >> x;
+			min_value = min(min_value, x);
+			s.push({ x, min_value });
+		}
+	}
+	stringstream ss;
+	while (!s.empty()) {
+		auto value = s.top(); s.pop();
+		cout << value.first << " ";
+		ss << value.second << " ";
+	}
+	cout << endl << ss.str() << endl;
+}
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单
