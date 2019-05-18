@@ -9,8 +9,7 @@
                 "${fileDirname}/${fileBasenameNoExtension}.exe", 
                 "-g", // 生成和调试有关的信息 
                 "-Wall", // 开启额外警告 
-                "-static-libgcc", // 静态链接libgcc 
-                "--target=x86_64-w64-mingw", // clang的默认target为msvc，不加这一条就会找不到头文件；Linux下去掉这一条 
+                "-static-libgcc", // 静态链接libgcc
                 "-std=c++17" // C++最新标准为c++17，或根据自己的需要进行修改 
                 ], // 编译命令参数 
             "type": "process", // process是vsc把预定义变量和转义解析后直接全部传给command；shell相当于先打开shell再输入命令，所以args还会经过shell再解析一遍 
