@@ -1,10 +1,8 @@
 {
     "files.associations": {
-        "xstring": "cpp",
         "iostream": "cpp",
-        "unordered_map": "cpp",
-        "map": "cpp",
-        "hash_map": "cpp",
-        "ios": "cpp"
+        "iosfwd": "cpp",
+        "xlocale": "cpp",
+        "stdexcept": "cpp"
     }
 }
