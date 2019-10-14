@@ -15,6 +15,9 @@ int query(int x) {
 }
 
 int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+
 	int n, m, tot = 0;
 	cin >> n;
 	for (int i = 0; i < n; i++) cin >> a[i], b[++tot] = a[i];
