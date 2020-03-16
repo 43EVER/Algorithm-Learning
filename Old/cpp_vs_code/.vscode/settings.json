@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "iosfwd": "cpp",
+        "xlocale": "cpp",
+        "stdexcept": "cpp",
+        "cmath": "cpp",
+        "xstddef": "cpp",
+        "algorithm": "cpp",
+        "ostream": "cpp",
+        "utility": "cpp",
+        "deque": "cpp"
+    }
+}
