@@ -1,5 +1,4 @@
-# Algorithm-Learning
+# 算法学习
 
-This is a Repository to store the code of my Algorithm Learning
+记录自己学习算法的仓库
 
-It's also a Test of my Github Learning
